@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Search, Shield, Activity, MapPin, ArrowLeft } from 'lucide-react';
 import Button from '../components/Button';
-
+import { MapContainer, TileLayer } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 const Landing = () => {
   return (
     <div className="min-h-screen bg-white">
@@ -51,22 +52,28 @@ const Landing = () => {
               </div>
             </div>
             <div className="md:w-1/2 mt-16 md:mt-0 relative">
-              <div className="w-full h-[500px] bg-blue-100 rounded-3xl overflow-hidden relative border-8 border-white shadow-2xl">
-                 <img
-                  src="https://images.unsplash.com/photo-1587854680352-936b22b91030?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                  alt="Medical Search"
-                  className="w-full h-full object-cover"
-                 />
-                 <div className="absolute inset-0 bg-blue-600/10 mix-blend-multiply"></div>
-              </div>
+<div className="w-full h-[500px] rounded-3xl overflow-hidden relative border-8 border-white shadow-2xl">
+  <MapContainer
+    center={[35.6892, 51.389]}
+  zoom={13}
+  zoomControl={false}
+  scrollWheelZoom={false}
+  style={{ height: '100%', width: '100%' }}
+  >
+    <TileLayer
+      url="https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"
+    />
+  </MapContainer>
+
+</div>
               {/* Floating elements */}
-              <div className="absolute -bottom-10 -right-10 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 hidden lg:block">
+              <div className="absolute -bottom-10 -right-10 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 hidden lg:block z-[100000]">
                  <div className="flex items-center space-x-4 space-x-reverse">
                     <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
                        <Activity size={24} />
                     </div>
                     <div>
-                       <p className="text-sm text-slate-500">امدادگران فعال</p>
+                       <p className="text-sm text-slate-500 ">امدادگران فعال</p>
                        <p className="text-xl font-bold">۱,۲۴۰ نفر</p>
                     </div>
                  </div>
